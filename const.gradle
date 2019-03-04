@@ -1,0 +1,18 @@
+ext { //定义公用参数  使用rootProject.ext.android_const.XX就能拿到相应对象
+
+    android_const = [
+            minSdkVersion : 19,
+            targetSdkVersion : 28,
+            compileSdkVersion : 28,
+            buildToolsVersion : "28.0.3",
+            packageName : "com.selfapp",
+
+            support    : "28.0.0"
+    ]
+
+    app_dep = [
+            "appcompat-v7"      : 'com.android.support:appcompat-v7:' + android_const.support,
+    ]
+
+
+}

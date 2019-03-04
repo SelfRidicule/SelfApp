@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Landptf</string>
+    <string name="button_extend_m_default_text">text</string>
+    <string name="dialog_m_title">提示</string>
+    <string name="dialog_m_sure">确定</string>
+    <string name="count_down_m_recapture_after">秒后可重新发送</string>
+    <string name="count_down_m_recapture">重新获取验证码</string>
+</resources>

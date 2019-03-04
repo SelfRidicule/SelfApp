@@ -1,5 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+apply from: "./const.gradle" //引入const.gradle 有点继承的感觉 也就是现在rootProject也就拥有const.gradle里的方法和变量
+
 buildscript {
 
     repositories {
@@ -13,7 +15,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -37,9 +39,12 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+
+//ext { //定义公用参数  使用rootProject.ext.XX就能拿到相应对象
+//    minSdkVersion = 19
+//    targetSdkVersion = 28
+//    compileSdkVersion = 28
+//    buildToolsVersion = "28.0.3"
+//    packageName = "com.selfapp"
 //
-ext {
-    minSdkVersion = 28
-    targetSdkVersion = 28
-    compileSdkVersion = 28
-}
+//}

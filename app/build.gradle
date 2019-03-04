@@ -1,52 +1,184 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.android_const.compileSdkVersion
+    buildToolsVersion rootProject.ext.android_const.buildToolsVersion
+
     defaultConfig {
-        applicationId "com.selfapp"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.android_const.packageName
+        minSdkVersion rootProject.ext.android_const.minSdkVersion
+        targetSdkVersion rootProject.ext.android_const.targetSdkVersion
+
+        //project.hasProperty()方法是从同级目录下的gradle.properties文件里拿值
+        //(一定要返回整数类型,不然会被versionCode认为成方法)
+        if (project.hasProperty('VERSION_CODE')) {
+            versionCode GetVersionCode(VERSION_CODE)
+        }else{
+            versionCode 1
+        }
+
+        //project.hasProperty()方法是从同级目录下的gradle.properties文件里拿值
+        if (project.hasProperty('VERSION_NAME')) {
+            versionName GetVersionName(VERSION_NAME)
+        }else{
+            versionName '1.1.1'
+        }
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+    }
+
+    signingConfigs {
+
+        debug {
+            keyAlias 'debug'
+            keyPassword '123456'
+            storeFile file('../keystore/debug/debug.jks')
+            storePassword '123456'
+
+        }
+
+        release {
+            keyAlias "release"
+            keyPassword "112233"
+            storeFile file('../keystore/release/release.jks')
+            storePassword "112233"
+        }
+
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField 'String' , "RESOURCE_PREFIX", '"http://"'
+            debuggable false
+            jniDebuggable false
+            minifyEnabled false      //混淆编译
+            //minifyEnabled true      //混淆编译
+            zipAlignEnabled true    //设置是否对APK包执行ZIP对齐优化
+            shrinkResources false    //移除无用的资源文件
 
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
 
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField 'String' , "RESOURCE_PREFIX", '"http://"'
+            zipAlignEnabled false
+            shrinkResources false
+
+            signingConfig signingConfigs.debug
         }
 
+    }
+
+    productFlavors {
+
         prod {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField 'String' , "RESOURCE_PREFIX", '"http://"'
+            buildConfigField("String", "API_HOST", "\"https://\"")
+
+            resValue "string", "app_name", "SelfApp_prod"
         }
+
+
+        dev {
+            buildConfigField("String", "API_HOST", "\"http://\"")
+
+            resValue "string", "app_name", "SelfApp_dev"
+        }
+
+    }
+
+    lintOptions {
+        // Turns off checks for the issue IDs you specify.
+        disable 'TypographyFractions','TypographyQuotes'
+        // Turns on checks for the issue IDs you specify. These checks are in
+        // addition to the default lint checks.
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        // To enable checks for only a subset of issue IDs and ignore all others,
+        // list the issue IDs with the 'check' property instead. This property overrides
+        // any issue IDs you enable or disable using the properties above.
+        check 'NewApi', 'InlinedApi'
+        // If set to true, turns off analysis progress reporting by lint.
+        quiet true
+        // if set to true (default), stops the build if errors are found.
+        abortOnError false
+        // if true, only report errors.
+        ignoreWarnings true
     }
 
 }
 
+
+
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    //添加友盟追踪
+    implementation 'com.umeng.analytics:analytics:latest.integration'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+//    apt 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
-
-    implementation 'com.google.code.gson:gson:2.8.0'
-
+    implementation 'com.lzy.net:okgo:2.1.4'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+//    annotationProcessor 'com.github.bumptech.glide:glide:4.8.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'org.apache.commons:commons-collections4:4.1'
     implementation 'org.apache.commons:commons-lang3:3.5'
 
+    implementation project(':libzxing')
+    implementation project(':imageselector')
+    implementation project(':landptf')
+}
+
+
+android.applicationVariants.all { variant ->
+//批量修改Apk名字
+    variant.outputs.all { output ->
+        if (!variant.buildType.isDebuggable()) {
+            //获取签名的名字 variant.signingConfig.name
+            // 要被替换的源字符串
+            def sourceFile = "-${variant.flavorName}-${variant.buildType.name}"
+            def today = new Date().format('yyMMddHHmm')
+            //替换的字符串
+            def replaceFile = "_${variant.flavorName}_${variant.buildType.name}_V${variant.versionName}_${variant.versionCode}_${today}"
+            outputFileName = output.outputFile.name.replace(sourceFile, replaceFile)
+            //遗留问题：如何获取当前module的name，如CodeBooke这个名字怎么获取到
+        }
+    }
+}
+
+/*获取版本名字(一定要返回整数类型,不然会被versionCode认为成方法)*/
+def GetVersionCode(String version_code) {
+    java.lang.Integer my_number = Integer.valueOf(version_code)
+    return my_number
+}
+
+/*获取版本名字*/
+def GetVersionName(String version_name) {
+
+//    char[]  version_name_char = String.format('%03d',Integer.parseInt(version_name)).toCharArray()
+//
+//    java.lang.StringBuffer stringBuffer = new StringBuffer()
+//
+//    stringBuffer.append(version_name_char[0])
+//    stringBuffer.append('.')
+//    stringBuffer.append(version_name_char[1])
+//    stringBuffer.append('.')
+//    stringBuffer.append(version_name_char[2])
+//
+//    println stringBuffer.toString()
+//
+//    return stringBuffer.toString()
+
+    java.lang.String my_char = String.valueOf(version_name)
+    return my_char
 }

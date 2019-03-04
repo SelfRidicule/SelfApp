@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@color/mainColor"
+        android:textColor="@android:color/white"
+        android:text="@string/dialog_m_title"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center"
+        android:lineSpacingMultiplier="1.5"
+        android:minHeight="120dp"
+        android:minWidth="240dp"
+        android:padding="16dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:background="@android:color/white"
+        android:textColor="@color/text"
+        android:textSize="18sp"/>
+
+    <ViewStub
+        android:id="@+id/vs_alert"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout="@layout/viewstub_dialog_m_alert"/>
+
+    <ViewStub
+        android:id="@+id/vs_tip"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout="@layout/viewstub_dialog_m_tip"/>
+
+</LinearLayout>
