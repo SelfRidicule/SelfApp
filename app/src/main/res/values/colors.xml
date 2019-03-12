@@ -11,5 +11,9 @@
 
     <color name="color_00000000">#00000000</color>
 
+    <color name="color_FFFFFF">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="color_E4393C">#E4393C</color>
 
 </resources>

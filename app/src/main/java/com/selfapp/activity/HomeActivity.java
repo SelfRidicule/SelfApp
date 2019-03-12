@@ -32,4 +32,9 @@ public class HomeActivity extends BaseAppCompatActivity {
     }
 
 
+    @Override
+    protected String getColorTransparent() {
+        return "";
+    }
+
 }
