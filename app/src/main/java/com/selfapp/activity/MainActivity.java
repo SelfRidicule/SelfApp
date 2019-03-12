@@ -1,10 +1,11 @@
-package com.selfapp;
+package com.selfapp.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
-import com.selfapp.home.HomeActivity;
+
+import com.selfapp.R;
 import com.selfapp.permission.PermissionsActivity;
 import com.selfapp.permission.PermissionsChecker;
 
