@@ -22,6 +22,7 @@ public class SharedPreferencesUtil {
      * =================================================================================
      */
     public static String Self_PACKGNAME = "selfapp";
+    public static String Self_ID = "user_id";
 
     /**
      * =================================================================================
