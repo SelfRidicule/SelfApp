@@ -24,6 +24,12 @@ public class NumImageView extends AppCompatImageView {
     //初始化画笔
     Paint paint = new Paint();
 
+    //背景色
+    private int backColor= 0xffff4444;
+    //字体颜色
+    private int fontColor= 0xffffffff;
+
+
     public NumImageView(Context context) {
         super(context);
     }
@@ -36,9 +42,29 @@ public class NumImageView extends AppCompatImageView {
         super(context, attrs, defStyleAttr);
     }
 
-    //设置显示的数量
+    /**
+     * @param num 设置显示的数量
+     */
     public void setNum(int num) {
         this.num = num;
+        //重新绘制画布
+        invalidate();
+    }
+
+    /**
+     * @param backColor 设置背景色
+     */
+    public void setBackColor(int backColor) {
+        this.backColor = backColor;
+        //重新绘制画布
+        invalidate();
+    }
+
+    /**
+     * @param fontColor 设置字体颜色
+     */
+    public void setFontColor(int fontColor) {
+        this.fontColor = fontColor;
         //重新绘制画布
         invalidate();
     }
@@ -48,7 +74,7 @@ public class NumImageView extends AppCompatImageView {
         super.onDraw(canvas);
         if (num > 0) {
             //初始化半径
-            radius = getWidth() / 10;
+            radius = getWidth() / 4;
             //初始化字体大小
             textSize = num < 10 ? radius + 5 : radius;
             //初始化边距
@@ -58,13 +84,13 @@ public class NumImageView extends AppCompatImageView {
             //设置抗锯齿
             paint.setAntiAlias(true);
             //设置颜色为红色
-            paint.setColor(0xffff4444);
+            paint.setColor(backColor);
             //设置填充样式为充满
             paint.setStyle(Paint.Style.FILL);
             //画圆
             canvas.drawCircle(getWidth() - radius - paddingRight/2, radius + paddingTop/2, radius, paint);
             //设置颜色为白色
-            paint.setColor(0xffffffff);
+            paint.setColor(fontColor);
             //设置字体大小
             paint.setTextSize(textSize);
             //画数字
