@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
                     PermissionsActivity.startActivityForResult(MainActivity.this, REQUEST_CODE);
 
                 }else{
-                    updateApp();
+                    goApp();
                 }
             }
         },100);
@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     /**
      * 进入app
      */
-    public void updateApp() {
+    public void goApp() {
 
         /**
          * 开启线程
