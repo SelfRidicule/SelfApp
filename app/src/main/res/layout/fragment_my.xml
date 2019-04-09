@@ -1,22 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="14sp"
-            android:textColor="@color/color_666666"
-            android:layout_centerInParent="true"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        />
+
+                    <LinearLayout style="@style/ItemContainer">
+
+                        <ImageView
+                            style="@style/ItemIconLarge"
+                            android:src="@drawable/ic_phone" />
+
+                        <TextView
+                            style="@style/ItemText"
+                            android:text="我的消息" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/ItemContainer">
+
+                        <ImageView
+                            style="@style/ItemIconLarge"
+                            android:src="@drawable/ic_phone" />
+
+                        <TextView
+                            style="@style/ItemText"
+                            android:text="我的收藏" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y20"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/y10">
+
+
+                <LinearLayout style="@style/ItemContainerLarge">
+
+                    <ImageView
+                        style="@style/ItemIconLarge"
+                        android:src="@drawable/ic_phone" />
+
+                    <TextView
+                        style="@style/ItemTextLarge"
+                        android:text="夜间模式" />
+                </LinearLayout>
+
+
+                <LinearLayout style="@style/ItemContainerLarge"
+                    android:id="@+id/ll_settings">
+
+                    <ImageView
+                        style="@style/ItemIconLarge"
+                        android:src="@drawable/ic_phone" />
+
+                    <TextView
+                        style="@style/ItemTextLarge"
+                        android:text="设置" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/ItemContainerLarge">
+
+                    <ImageView
+                        style="@style/ItemIconLarge"
+                        android:src="@drawable/ic_phone" />
+
+                    <TextView
+                        style="@style/ItemTextLarge"
+                        android:text="退出" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.DrawerLayout>
+
+
 
 </LinearLayout>

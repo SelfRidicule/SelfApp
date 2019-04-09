@@ -113,6 +113,9 @@ public class HomeActivity extends BaseAppCompatActivity {
                 return mFragmentList.size();
             }
         });
+
+        //设置缓存view 的个数（实际有3个，缓存2个+正在显示的1个
+        mViewPager.setOffscreenPageLimit(2);
     }
 
     private View getTabView(int index) {

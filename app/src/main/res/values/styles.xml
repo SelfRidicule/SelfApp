@@ -17,4 +17,51 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
+
+    <!--侧滑，设置界面Item-->
+    <style name="ItemContainer">
+        <item name="android:clickable">true</item>
+        <item name="android:paddingLeft">@dimen/x15</item>
+        <item name="android:paddingRight">@dimen/x15</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ItemIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--直接继承-->
+    <style name="ItemIconLarge" parent="ItemIcon">
+    </style>
+
+    <style name="ItemText">
+        <item name="android:layout_marginLeft">@dimen/x15</item>
+        <item name="android:textColor">@color/color_menu_font</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ItemContainerLarge">
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ItemTextLarge">
+        <item name="android:layout_marginLeft">@dimen/x5</item>
+        <item name="android:textColor">@color/color_menu_font</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>

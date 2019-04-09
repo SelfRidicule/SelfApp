@@ -1,15 +1,9 @@
 package com.selfapp.fragment;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +28,11 @@ public class MyFragment extends BaseFragment {
     //显示
     @BindView(R.id.tv)
     TextView tv;
+
+    //显示
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer_layout;
+
 
     /**
      * 一定要在onCreate方法获取参数。在onCreateView中获取参数，而此方法在某些状态下并不会被调用，导致数据丢失。
@@ -79,7 +78,7 @@ public class MyFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv:
-
+                openDrawer();
                 break;
 
             default:
@@ -89,6 +88,19 @@ public class MyFragment extends BaseFragment {
         }
     }
 
+    /**
+     *  隐藏侧滑菜单
+     */
+    private void closeDrawer() {
+        drawer_layout.closeDrawer(Gravity.START);
+    }
+
+    /**
+     * 显示侧滑菜单
+     */
+    private void openDrawer() {
+        drawer_layout.openDrawer(Gravity.LEFT);
+    }
 
     @Override
     public void onResume() {
