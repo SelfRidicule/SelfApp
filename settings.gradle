@@ -1,1 +1,1 @@
-include ':app', ':libzxing','imageselector','landptf'
+include ':app', ':libzxing','imageselector','landptf', 'niceimageview'

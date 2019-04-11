@@ -47,9 +47,13 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                    <include
+                        layout="@layout/drawer_menu_top"
+                        />
+
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y80"
+                        android:layout_height="@dimen/y40"
                         />
 
                     <LinearLayout style="@style/ItemContainer">

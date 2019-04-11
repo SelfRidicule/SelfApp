@@ -171,6 +171,7 @@ dependencies {
     implementation project(':libzxing')
     implementation project(':imageselector')
     implementation project(':landptf')
+    implementation project(':niceimageview')
 }
 
 
