@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +34,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.selfapp.R;
 import com.selfapp.util.BackLogin;
 import com.umeng.analytics.MobclickAgent;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -410,6 +412,54 @@ public class BaseAppCompatActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     *  显示二维码
+     */
+    public void showMyCode(String value){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.dialogNoBg);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.my_code, null);
+        ImageView iv = v.findViewById(R.id.iv);
+
+        iv.setImageBitmap(CodeUtils.createImage(value, 400, 400, null));
+
+        //builer.setView(v);//这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
+        final Dialog dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setContentView(v);//自定义布局应该在这里添加，要在dialog.show()的后面
+        //dialog.getWindow().setGravity(Gravity.CENTER);//可以设置显示的位置
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     *  显示二维码 带 log
+     */
+    public void showMyCodeLog(String value){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.dialogNoBg);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.my_code, null);
+        ImageView iv = v.findViewById(R.id.iv);
+
+        iv.setImageBitmap(CodeUtils.createImage(value, 400, 400, BitmapFactory.decodeResource(getResources(), R.drawable.cocos2dx)));
+
+        //builer.setView(v);//这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
+        final Dialog dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setContentView(v);//自定义布局应该在这里添加，要在dialog.show()的后面
+        //dialog.getWindow().setGravity(Gravity.CENTER);//可以设置显示的位置
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
 }

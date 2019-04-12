@@ -60,7 +60,7 @@
 
                         <ImageView
                             style="@style/ItemIconLarge"
-                            android:src="@drawable/ic_phone" />
+                            android:src="@drawable/icon_pen" />
 
                         <TextView
                             style="@style/ItemText"
@@ -71,11 +71,45 @@
 
                         <ImageView
                             style="@style/ItemIconLarge"
-                            android:src="@drawable/ic_phone" />
+                            android:src="@drawable/icon_pen" />
 
                         <TextView
                             style="@style/ItemText"
                             android:text="我的收藏" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y20"
+                        android:background="@color/color_e7e9e9"
+                        android:layout_marginTop="@dimen/y20"
+                        android:layout_marginBottom="@dimen/y20"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/scanning"
+                        style="@style/ItemContainer">
+
+                        <ImageView
+                            style="@style/ItemIconLarge"
+                            android:src="@drawable/icon_pen" />
+
+                        <TextView
+                            style="@style/ItemText"
+                            android:text="扫一扫" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/my_code"
+                        style="@style/ItemContainer">
+
+                        <ImageView
+                            style="@style/ItemIconLarge"
+                            android:src="@drawable/icon_pen" />
+
+                        <TextView
+                            style="@style/ItemText"
+                            android:text="二维码" />
                     </LinearLayout>
 
                 </LinearLayout>

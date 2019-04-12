@@ -168,10 +168,11 @@ dependencies {
     implementation 'org.apache.commons:commons-collections4:4.1'
     implementation 'org.apache.commons:commons-lang3:3.5'
 
-    implementation project(':libzxing')
     implementation project(':imageselector')
     implementation project(':landptf')
     implementation project(':niceimageview')
+    implementation project(':lib-zxing')
+
 }
 
 

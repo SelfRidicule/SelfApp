@@ -27,6 +27,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">@dimen/y5</item>
+        <item name="android:layout_marginBottom">@dimen/y5</item>
     </style>
 
     <style name="ItemIcon">
@@ -35,7 +37,9 @@
     </style>
 
     <!--直接继承-->
-    <style name="ItemIconLarge" parent="ItemIcon">
+    <style name="ItemIconLarge">
+        <item name="android:layout_width">@dimen/x40</item>
+        <item name="android:layout_height">@dimen/y60</item>
     </style>
 
     <style name="ItemText">

@@ -11,7 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/imageselector" />
             <option value="$PROJECT_DIR$/landptf" />
-            <option value="$PROJECT_DIR$/libzxing" />
+            <option value="$PROJECT_DIR$/lib-zxing" />
             <option value="$PROJECT_DIR$/niceimageview" />
           </set>
         </option>

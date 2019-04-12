@@ -1,5 +1,6 @@
 package com.selfapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -8,9 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.selfapp.R;
 import com.selfapp.fragment.base.BaseFragment;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +29,13 @@ public class MyFragment extends BaseFragment {
 
     private static final String TAG = "MyFragment";
     private View mRootView;
+
+    /**
+     * 扫描跳转Activity RequestCode
+     */
+    public static final int REQUEST_CODE = 111;
+
+
 
     //显示
     @BindView(R.id.tv)
@@ -74,18 +86,51 @@ public class MyFragment extends BaseFragment {
         tv.setText("我的");
     }
 
-    @OnClick({R.id.tv})
+    @OnClick({R.id.tv, R.id.scanning, R.id.my_code})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv:
                 openDrawer();
                 break;
+            //扫一扫
+            case R.id.scanning:
+                ZXingLibrary.initDisplayOpinion(getContext());
+                Intent intent = new Intent(getContext(), CaptureActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+                break;
+            //我的二维码
+            case R.id.my_code:
+                showMyCodeLog("123");
+                break;
 
             default:
-
                 showPopuWindow("提示","尚在开发，敬请等待...",tv);
                 break;
         }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Toast.makeText(getContext(), "解析结果:" + result, Toast.LENGTH_LONG).show();
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(getContext(), "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
     }
 
     /**
