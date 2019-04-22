@@ -22,7 +22,9 @@ import com.selfapp.fragment.HomeFragment;
 import com.selfapp.fragment.MyFragment;
 import com.selfapp.fragment.base.BaseFragment;
 import com.selfapp.util.AppShortCutUtil;
+import com.selfapp.util.Consts;
 import com.selfapp.util.SharedPreferencesUtil;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,9 @@ public class HomeActivity extends BaseAppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //友盟统计
+        umengInit();
 
         //初始化
         init();
@@ -193,6 +198,17 @@ public class HomeActivity extends BaseAppCompatActivity {
         super.onDestroy();
     }
 
+    /**
+     * 初始化common库
+     * 参数1:上下文，不能为空
+     * 参数2:【友盟+】 AppKey
+     * 参数3:【友盟+】 Channel
+     * 参数4:设备类型，UMConfigure.DEVICE_TYPE_PHONE为手机、UMConfigure.DEVICE_TYPE_BOX为盒子，默认为手机
+     * 参数5:Push推送业务的secret，需要集成Push功能时必须传入Push的secret，否则传空。
+     */
+    public void umengInit(){
+        UMConfigure.init(this, Consts.umengAppKey, "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+    }
 
     @Override
     protected String getColorTransparent() {

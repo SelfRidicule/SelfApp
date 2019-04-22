@@ -12,6 +12,8 @@ buildscript {
         jcenter()
         google()
         mavenCentral()
+
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 
     dependencies {
@@ -31,6 +33,8 @@ allprojects {
         jcenter()
         google()
         mavenCentral()
+
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
 
