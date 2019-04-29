@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 
+import com.selfapp.BuildConfig;
+
 import java.util.Map;
 
 /**
@@ -21,7 +23,7 @@ public class SharedPreferencesUtil {
     /**
      * =================================================================================
      */
-    public static String Self_PACKGNAME = "selfapp";
+    public static String Self_PACKGNAME = BuildConfig.APPLICATION_ID;
     public static String Self_ID = "user_id";
 
     /**
