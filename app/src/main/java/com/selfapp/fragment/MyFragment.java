@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.selfapp.R;
+import com.selfapp.activity.map.GaoDeMapActivity;
 import com.selfapp.fragment.base.BaseFragment;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -86,7 +87,7 @@ public class MyFragment extends BaseFragment {
         tv.setText("我的");
     }
 
-    @OnClick({R.id.tv, R.id.scanning, R.id.my_code})
+    @OnClick({R.id.tv, R.id.scanning, R.id.my_code, R.id.my_gaode_map})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv:
@@ -102,7 +103,10 @@ public class MyFragment extends BaseFragment {
             case R.id.my_code:
                 showMyCodeLog("123");
                 break;
-
+            //高德地图
+            case R.id.my_gaode_map:
+                startActivity(new Intent(getContext(), GaoDeMapActivity.class));
+                break;
             default:
                 showPopuWindow("提示","尚在开发，敬请等待...",tv);
                 break;

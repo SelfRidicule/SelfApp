@@ -112,6 +112,19 @@
                             android:text="二维码" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/my_gaode_map"
+                        style="@style/ItemContainer">
+
+                        <ImageView
+                            style="@style/ItemIconLarge"
+                            android:src="@drawable/icon_pen" />
+
+                        <TextView
+                            style="@style/ItemText"
+                            android:text="高德地图" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </ScrollView>
 
